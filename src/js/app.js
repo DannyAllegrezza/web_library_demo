@@ -1,6 +1,19 @@
-let library = new Library();
-let book = new Book("Danny Allegrezza", "How to 2JZ Swap your S13", 2017, 12312312);
-let book = new Book("Danny Allegrezza", "How to 2JZ Swap your S13", 2017, 12312312);
-
-library.AddBook(book);
-alert(library.toString());
+(function () {
+    const url = "";
+    var library = new Library();
+    
+    // Fetch the data so we can load it later
+    HttpRequest.PerformGetRequest(url)
+    .then(function(result){
+        result.forEach(function(element) {
+            let book = new Book(element.author, element.title, element.year, element.isbn);
+            library.AddSingleBook(book);
+        }, this);
+        // Display to console
+        library.PrintBooksToConsole();
+    })
+    .catch(function(error){
+        console.log("An error occurred");
+        console.log(error);
+    });
+}());

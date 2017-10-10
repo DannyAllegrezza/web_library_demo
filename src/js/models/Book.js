@@ -3,10 +3,18 @@
  */
 class Book {
     constructor(author, title, year, isbn){
-        this.Author = author;
-        this.Title = title;
-        this.Year = year;
-        this.ISBN = isbn;
+        this.Author = Sanitize(author);
+        this.Title = Sanitize(title);
+        this.Year = Sanitize(year);
+        this.ISBN = Sanitize(isbn);
+
+        function Sanitize(prop){
+            if(!prop){
+                return "N/A";
+            }
+    
+            return prop;
+        }
     }
 
     toString(){
