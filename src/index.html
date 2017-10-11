@@ -10,6 +10,8 @@
     <meta name="author" content="Danny Allegrezza">
 
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
@@ -17,6 +19,28 @@
 </head>
 
 <body>
+    <div class="container">
+        <h2 id="title"></h2>
+        <p id="overview"></p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Year Published</th>
+                    <th>ISBN</th>
+                </tr>
+            </thead>
+            <tbody id="table-body">
+                <tr>
+                    <td>John</td>
+                    <td>Doe</td>
+                    <td>john@example.com</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
     <script src="js/models/HttpRequest.js"></script>
     <script src="js/models/Book.js"></script>
     <script src="js/models/Library.js"></script>
