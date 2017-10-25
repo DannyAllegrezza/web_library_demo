@@ -29,22 +29,43 @@ class Library {
         }, this);
     }
 
+    /**
+     * Sorts the requested property in ascending order, then sets the sort order to "Descending"
+     */
+    SortBooksByPropertyAscending(property) {
+        let prop = property.dataset.bookatr;
+        //console.log("SortBooksByPropertyAscending(): property = " + prop);
+        this.Books.sort((a, b) => (a[prop] > b[prop]) ? 1 : -1);
+        property.dataset.sortorder = "desc";
+    }
+
+    /**
+     * Sorts the requested property in descending order, then sets the sort order to "Ascending"
+     */
+    SortBooksByPropertyDescending(property) {
+        let prop = property.dataset.bookatr;
+        //console.log("SortBooksByPropertyDescending(): property = " + prop);
+        this.Books.sort((a, b) => (a[prop] > b[prop]) ? -1 : 1);
+        property.dataset.sortorder = "asc";
+    }
+
+    /**
+     * Sorts the internal Books collection based on attribute and requested sort order
+     * @param {*} property 
+     */
     SortBooksByProperty(property) {
-        let prop = property.text.toLowerCase();
-        switch (prop) {
-            case "title":
-                console.log("title clicked");
+        let prop = property.dataset.bookatr;
+        let sort = property.dataset.sortorder;
+
+        switch (sort) {
+            case "asc":
+                this.SortBooksByPropertyAscending(property);
                 break;
-            case "author":
-                console.log("author clicked");
-                break;
-            case "year published":
-                console.log("year published clicked");
-                break;
-            case "isbn":
-                console.log("isbn clicked");
+            case "desc":
+                this.SortBooksByPropertyDescending(property);
                 break;
             default:
+                this.SortBooksByPropertyAscending(property);
                 break;
         }
     }

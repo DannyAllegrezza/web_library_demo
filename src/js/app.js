@@ -59,7 +59,8 @@
         var tableHeaders = document.querySelectorAll("a#sortable-th");
         for (var i = 0; i < tableHeaders.length; i++) {
             tableHeaders[i].addEventListener('click', function () {
-                library.SortBooksByProperty(this)
+                library.SortBooksByProperty(this);
+                addLibraryToDOM();
             }, false);
         }
 
