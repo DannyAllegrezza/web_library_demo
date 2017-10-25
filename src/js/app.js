@@ -3,31 +3,17 @@
     var library = new Library();
 
     // Fetch the data so we can load it later
+
     HttpRequest.PerformGetRequest(url)
         .then(createBooksFromJson)
         .then(addBooksToLibrary)
+        .then(setupEventListeners)
         .then(addLibraryToDOM)
         .catch(function (error) {
             console.log("An error occurred");
             console.log(error);
         });
 
-    function createBooksFromJson(json) {
-        var booksCollection = [];
-
-        var books = new Promise(function (resolve, reject) {
-            if (json == null) {
-                reject(Error("JSON was null"));
-            }
-
-            json.forEach(function (element) {
-                let book = new Book(element.author, element.title, element.year, element.isbn);
-                booksCollection.push(book);
-            }, this);
-        });
-
-        return booksCollection;
-    }
 
     function addBooksToLibrary(booksCollection) {
         library.AddBooks(booksCollection);
@@ -50,5 +36,32 @@
                     </tr>`;
         }, this);
         tableBody.innerHTML = html;
+    }
+
+    function createBooksFromJson(json) {
+        var booksCollection = [];
+
+        var books = new Promise(function (resolve, reject) {
+            if (json == null) {
+                reject(Error("JSON was null"));
+            }
+
+            json.forEach(function (element) {
+                let book = new Book(element.author, element.title, element.year, element.isbn);
+                booksCollection.push(book);
+            }, this);
+        });
+
+        return booksCollection;
+    }
+
+    function setupEventListeners() {
+        var tableHeaders = document.querySelectorAll("a#sortable-th");
+        for (var i = 0; i < tableHeaders.length; i++) {
+            tableHeaders[i].addEventListener('click', function () {
+                library.SortBooksByProperty(this)
+            }, false);
+        }
+
     }
 }());

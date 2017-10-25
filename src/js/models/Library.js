@@ -30,7 +30,23 @@ class Library {
     }
 
     SortBooksByProperty(property) {
-
+        let prop = property.text.toLowerCase();
+        switch (prop) {
+            case "title":
+                console.log("title clicked");
+                break;
+            case "author":
+                console.log("author clicked");
+                break;
+            case "year published":
+                console.log("year published clicked");
+                break;
+            case "isbn":
+                console.log("isbn clicked");
+                break;
+            default:
+                break;
+        }
     }
 
     PrintBooksToConsole() {
@@ -41,6 +57,6 @@ class Library {
 
     toString() {
         var book = (this.Count <= 1) ? "book" : "books";
-        return `The Library contains ${this.Count} ${book}.`
+        return `The Library contains ${this.Count} ${book}.`;
     }
 }
