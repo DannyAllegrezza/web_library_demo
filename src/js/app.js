@@ -27,7 +27,7 @@
         let tableBody = document.getElementById('table-body');
         let html = '';
         // Create rows to put inside the table
-        library.Books.forEach(function (element) {
+        library.FilteredBooks.forEach(function (element) {
             html += `<tr>
                         <td>${element.Title}</td>
                         <td>${element.Author}</td>
@@ -55,7 +55,17 @@
         return booksCollection;
     }
 
+    function handleSearch() {
+        var userQuery = document.getElementById("search-input");
+        console.log(userQuery.value);
+        
+        library.FilterBooks(userQuery.value);
+        addLibraryToDOM();
+
+    }
+
     function setupEventListeners() {
+        // Add event listeners to th elements so user can filter on-click
         var tableHeaders = document.querySelectorAll("a#sortable-th");
         for (var i = 0; i < tableHeaders.length; i++) {
             tableHeaders[i].addEventListener('click', function () {
@@ -63,6 +73,15 @@
                 addLibraryToDOM();
             }, false);
         }
-
+        // Add event listener to search button
+        var searchButton = document.getElementById("search-form");
+        searchButton.addEventListener('submit', function (e) {
+            e.preventDefault();
+            handleSearch();
+        }, false);
+        // Add event listener to input field
+        var userQuery = document.getElementById("search-input");
+        userQuery.addEventListener('input', handleSearch, false);
+        
     }
 }());

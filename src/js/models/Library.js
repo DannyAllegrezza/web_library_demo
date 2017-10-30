@@ -6,15 +6,24 @@ class Library {
     constructor() {
         var self = this;
         this.Books = [];
+        this.FilteredBooks = [];
         this.Count = 0;
     }
 
+    FilterBooks(searchKey) {
+        this.FilteredBooks = this.Books.filter(function (obj) {
+            return Object.keys(obj).some(function (key) {
+                return obj[key].includes(searchKey);
+            })
+        });
+    }
     /**
      * Adds a single book to the Libraries collection
      * @param {*} book 
      */
     AddSingleBook(book) {
         this.Books.push(book);
+        this.FilteredBooks.push(book);        
         this.Count++;
     }
 
@@ -78,6 +87,8 @@ class Library {
 
     toString() {
         var book = (this.Count <= 1) ? "book" : "books";
-        return `The Library contains ${this.Count} ${book}.`;
+        var filteredCount = (this.FilteredBooks.length > 0) ? this.FilteredBooks.length : 0;
+
+        return `The Library contains ${this.Count} ${book}. Currently showing ${filteredCount} / ${this.Count}.`;
     }
 }
